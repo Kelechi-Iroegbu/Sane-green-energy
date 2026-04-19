@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Leaf } from "lucide-react";
+import { Leaf, ShoppingCart } from "lucide-react";
 
 const nav = [
-  { to: "/", label: "Home" },
+  { to: "/", label: "Shop" },
   { to: "/solutions", label: "Solutions" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
@@ -33,12 +33,12 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <Link
-          to="/contact"
-          className="hidden md:inline-flex items-center rounded-md bg-primary px-4 py-2 text-xs font-mono uppercase tracking-widest text-primary-foreground shadow-glow-sm transition-all hover:shadow-glow"
+        <button
+          aria-label="Cart"
+          className="hidden md:inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-xs font-mono uppercase tracking-widest text-primary-foreground shadow-glow-sm transition-all hover:shadow-glow"
         >
-          Get Quote
-        </Link>
+          <ShoppingCart className="h-4 w-4" /> Cart · 0
+        </button>
       </div>
     </header>
   );
