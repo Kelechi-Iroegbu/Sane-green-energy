@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -59,11 +60,64 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-neon: var(--neon);
+  --color-neon-soft: var(--neon-soft);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --radius: 0.75rem;
+  /* Futuristic eco-tech: deep black + neon green */
+  --background: oklch(0.14 0.02 160);
+  --foreground: oklch(0.97 0.02 150);
+  --card: oklch(0.18 0.03 160);
+  --card-foreground: oklch(0.97 0.02 150);
+  --popover: oklch(0.18 0.03 160);
+  --popover-foreground: oklch(0.97 0.02 150);
+  --primary: oklch(0.85 0.28 145);
+  --primary-foreground: oklch(0.12 0.02 160);
+  --secondary: oklch(0.24 0.05 160);
+  --secondary-foreground: oklch(0.97 0.02 150);
+  --muted: oklch(0.22 0.03 160);
+  --muted-foreground: oklch(0.7 0.04 150);
+  --accent: oklch(0.7 0.25 155);
+  --accent-foreground: oklch(0.12 0.02 160);
+  --destructive: oklch(0.65 0.25 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.3 0.05 155 / 50%);
+  --input: oklch(0.25 0.04 160);
+  --ring: oklch(0.85 0.28 145);
+  --neon: oklch(0.88 0.3 145);
+  --neon-soft: oklch(0.85 0.28 145 / 30%);
+  --chart-1: oklch(0.85 0.28 145);
+  --chart-2: oklch(0.7 0.2 175);
+  --chart-3: oklch(0.6 0.18 195);
+  --chart-4: oklch(0.75 0.22 130);
+  --chart-5: oklch(0.65 0.2 110);
+  --sidebar: oklch(0.16 0.02 160);
+  --sidebar-foreground: oklch(0.97 0.02 150);
+  --sidebar-primary: oklch(0.85 0.28 145);
+  --sidebar-primary-foreground: oklch(0.12 0.02 160);
+  --sidebar-accent: oklch(0.24 0.05 160);
+  --sidebar-accent-foreground: oklch(0.97 0.02 150);
+  --sidebar-border: oklch(0.3 0.05 155 / 50%);
+  --sidebar-ring: oklch(0.85 0.28 145);
+
+  --gradient-hero: radial-gradient(ellipse at top, oklch(0.85 0.28 145 / 0.25), transparent 60%), linear-gradient(180deg, oklch(0.14 0.02 160), oklch(0.1 0.02 160));
+  --gradient-neon: linear-gradient(135deg, oklch(0.88 0.3 145), oklch(0.7 0.25 175));
+  --shadow-glow: 0 0 40px oklch(0.85 0.28 145 / 0.4), 0 0 80px oklch(0.85 0.28 145 / 0.2);
+  --shadow-glow-sm: 0 0 20px oklch(0.85 0.28 145 / 0.5);
+}
+
+:root,
+:root.light {
+  /* Force dark always — futuristic theme */
+}
+
+/* placeholder removed below */
+.__legacy_root_unused {
+  --legacy: 0;
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
