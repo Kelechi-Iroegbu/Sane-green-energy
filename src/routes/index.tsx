@@ -6,6 +6,7 @@ import productPanel from "@/assets/product-panel.jpg";
 import productBattery from "@/assets/product-battery.jpg";
 import productInverter from "@/assets/product-inverter.jpg";
 import productCharger from "@/assets/product-charger.jpg";
+import { useCart } from "@/context/CartContext";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,6 +46,7 @@ const deals = [
 ];
 
 function Home() {
+  const { addItem } = useCart();
   return (
     <>
       {/* HERO + SEARCH */}
@@ -181,7 +183,10 @@ function Home() {
                   <span className="font-display text-xl font-bold text-primary">${p.price.toLocaleString()}</span>
                   <span className="text-xs text-muted-foreground line-through">${p.oldPrice.toLocaleString()}</span>
                 </div>
-                <button className="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-primary-foreground hover:bg-primary/90 transition-colors">
+                <button
+                  onClick={() => addItem({ id: p.id, name: p.name, price: p.price, img: p.img })}
+                  className="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
                   <ShoppingCart className="h-3.5 w-3.5" /> Add to cart
                 </button>
               </div>
@@ -202,8 +207,12 @@ function Home() {
             </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {deals.map((d) => (
-              <div key={d.name} className="group rounded-xl bg-card border border-border/50 p-4 hover:border-primary/50 transition-colors">
+            {deals.map((d, idx) => (
+              <button
+                key={d.name}
+                onClick={() => addItem({ id: `deal-${idx}`, name: d.name, price: d.price, img: d.img })}
+                className="group text-left rounded-xl bg-card border border-border/50 p-4 hover:border-primary/50 transition-colors"
+              >
                 <div className="aspect-square rounded-lg overflow-hidden bg-background mb-3">
                   <img src={d.img} alt={d.name} width={768} height={768} loading="lazy" className="h-full w-full object-cover group-hover:scale-105 transition-transform" />
                 </div>
@@ -213,7 +222,7 @@ function Home() {
                   <span className="font-bold text-primary">${d.price.toLocaleString()}</span>
                   <span className="text-xs text-muted-foreground line-through">${d.oldPrice.toLocaleString()}</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
