@@ -207,8 +207,12 @@ function Home() {
             </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {deals.map((d) => (
-              <div key={d.name} className="group rounded-xl bg-card border border-border/50 p-4 hover:border-primary/50 transition-colors">
+            {deals.map((d, idx) => (
+              <button
+                key={d.name}
+                onClick={() => addItem({ id: `deal-${idx}`, name: d.name, price: d.price, img: d.img })}
+                className="group text-left rounded-xl bg-card border border-border/50 p-4 hover:border-primary/50 transition-colors"
+              >
                 <div className="aspect-square rounded-lg overflow-hidden bg-background mb-3">
                   <img src={d.img} alt={d.name} width={768} height={768} loading="lazy" className="h-full w-full object-cover group-hover:scale-105 transition-transform" />
                 </div>
@@ -218,7 +222,7 @@ function Home() {
                   <span className="font-bold text-primary">${d.price.toLocaleString()}</span>
                   <span className="text-xs text-muted-foreground line-through">${d.oldPrice.toLocaleString()}</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
