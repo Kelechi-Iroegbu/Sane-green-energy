@@ -6,6 +6,7 @@ import productPanel from "@/assets/product-panel.jpg";
 import productBattery from "@/assets/product-battery.jpg";
 import productInverter from "@/assets/product-inverter.jpg";
 import productCharger from "@/assets/product-charger.jpg";
+import { useCart } from "@/context/CartContext";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,6 +46,7 @@ const deals = [
 ];
 
 function Home() {
+  const { addItem } = useCart();
   return (
     <>
       {/* HERO + SEARCH */}
@@ -181,7 +183,10 @@ function Home() {
                   <span className="font-display text-xl font-bold text-primary">${p.price.toLocaleString()}</span>
                   <span className="text-xs text-muted-foreground line-through">${p.oldPrice.toLocaleString()}</span>
                 </div>
-                <button className="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-primary-foreground hover:bg-primary/90 transition-colors">
+                <button
+                  onClick={() => addItem({ id: p.id, name: p.name, price: p.price, img: p.img })}
+                  className="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
                   <ShoppingCart className="h-3.5 w-3.5" /> Add to cart
                 </button>
               </div>
