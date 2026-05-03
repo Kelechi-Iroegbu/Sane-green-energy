@@ -11,7 +11,7 @@ export function SiteFooter() {
               <Leaf className="h-4 w-4 text-primary-foreground" />
             </div>
             <span className="font-display text-lg font-bold">
-              Seeing<span className="text-primary">Green</span> Energy
+              Seeing<span className="text-primary">GreenBoy</span> Energy
             </span>
           </div>
           <p className="text-sm text-muted-foreground max-w-sm">
