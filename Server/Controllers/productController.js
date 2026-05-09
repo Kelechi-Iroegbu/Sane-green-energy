@@ -48,4 +48,14 @@ const deleteProduct = asyncHandler(async (req, res) => {
   res.json({ message: "Product removed" });
 });
 
-module.exports = { getProducts, getProductById, createProduct, updateProduct, deleteProduct };
+// GET /api/products/categories
+const getCategories = asyncHandler(async (req, res) => {
+  const categories = await Product.aggregate([
+    { $group: { _id: "$category", count: { $sum: 1 } } },
+    { $project: { _id: 0, name: "$_id", count: 1 } },
+    { $sort: { name: 1 } },
+  ]);
+  res.json(categories);
+});
+
+module.exports = { getProducts, getProductById, createProduct, updateProduct, deleteProduct, getCategories };
