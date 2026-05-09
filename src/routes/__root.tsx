@@ -1,4 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CartProvider } from "@/context/CartContext";
@@ -61,16 +63,19 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const [queryClient] = useState(() => new QueryClient());
   return (
-    <CartProvider>
-      <div className="min-h-screen flex flex-col bg-background text-foreground">
-        <SiteHeader />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <SiteFooter />
-        <CartDrawer />
-      </div>
-    </CartProvider>
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>
+        <div className="min-h-screen flex flex-col bg-background text-foreground">
+          <SiteHeader />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <SiteFooter />
+          <CartDrawer />
+        </div>
+      </CartProvider>
+    </QueryClientProvider>
   );
 }
