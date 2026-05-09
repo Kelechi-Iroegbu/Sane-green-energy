@@ -6,11 +6,9 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-  getCategories,
 } = require("../Controllers/productController");
 const { protect, admin } = require("../middleware/authMiddleware");
 
-router.get("/categories", getCategories);
 router.route("/").get(getProducts).post(protect, admin, createProduct);
 router
   .route("/:id")
