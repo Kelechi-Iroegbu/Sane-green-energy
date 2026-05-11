@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Leaf, ShoppingCart } from "lucide-react";
+import {ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import sane.png from "@/assets/sane.png";
 
