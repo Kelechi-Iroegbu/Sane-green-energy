@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import {ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import sane.png from "@/assets/sane.png";
+import saneLogo from "@/assets/sane.png";
 
 const nav = [
   { to: "/", label: "Shop" },
@@ -18,7 +18,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="flex items-center gap-2 group">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground">
-            <img src={sane.png} alt="SaneGreenEnergy Logo" className="h-8 w-auto" />
+            <img src={saneLogo} alt="SaneGreenEnergy Logo" className="h-8 w-auto" />
           </div>
           <span className="font-display text-lg font-semibold tracking-tight">
             SaneGreenEnergy
