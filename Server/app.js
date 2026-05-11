@@ -12,6 +12,7 @@ const productRoutes = require("./Routes/productRoutes");
 const cartRoutes = require("./Routes/cartRoutes");
 const orderRoutes = require("./Routes/orderRoutes");
 
+// Seeing Green Energy API — dynamic products build
 connectDB();
 
 const app = express();
