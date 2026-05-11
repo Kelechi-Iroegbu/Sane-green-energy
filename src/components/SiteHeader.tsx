@@ -20,7 +20,7 @@ export function SiteHeader() {
             <Leaf className="h-4 w-4 text-background" />
           </div>
           <span className="font-display text-lg font-semibold tracking-tight">
-            SeeingGreen
+            SaneGreenEnergy
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
