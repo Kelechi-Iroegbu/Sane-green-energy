@@ -37,7 +37,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border/50 py-6 text-center text-xs font-mono text-muted-foreground">
-        © {new Date().getFullYear()} SeeingGreen Energy — All systems operational
+        © {new Date().getFullYear()} SaneGreenEnergy — All systems operational
       </div>
     </footer>
   );
