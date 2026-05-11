@@ -1,7 +1,8 @@
 // Whitelist of frontend origins allowed to call this API
 const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:3000",
+process.env.CLIENT_URL,
+"https://sanegreenenergy.com",
+"https://www.sanegreenenergy.com",
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
