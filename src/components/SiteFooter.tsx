@@ -30,7 +30,7 @@ export function SiteFooter() {
         <div>
           <h4 className="font-mono text-xs uppercase tracking-widest text-primary mb-4">Contact</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>hello@seeinggreen.energy</li>
+            <li>hello@sanegreen.energy</li>
             <li>+1 (415) 555-0142</li>
             <li>San Francisco, CA</li>
           </ul>
