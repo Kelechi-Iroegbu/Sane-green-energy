@@ -3,7 +3,6 @@ const allowedOrigins = [
 process.env.CLIENT_URL,
 "https://sanegreenenergy.com",
 "https://www.sanegreenenergy.com",
-  process.env.CLIENT_URL,
 ].filter(Boolean);
 
 // Allow any Lovable preview/published subdomain + any *.pages.dev (Cloudflare) host
