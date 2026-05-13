@@ -2,4 +2,4 @@
 #Header update
 Footer Update 
 #Bigger Logo
-#Resize
+#Size
