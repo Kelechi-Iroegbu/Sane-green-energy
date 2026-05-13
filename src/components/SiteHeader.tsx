@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import {ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import saneLogo from "@/assets/sane.png";
+import saneLogo from "@/assets/Logo_Redesign.png";
 
 const nav = [
   { to: "/", label: "Shop" },
