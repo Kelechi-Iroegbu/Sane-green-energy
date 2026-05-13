@@ -17,8 +17,8 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground">
-            <img src={saneLogo} alt="SaneGreenEnergy Logo" className="h-14 w-14 object-contain"/>
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white">
+            <img src={saneLogo} alt="SaneGreenEnergy Logo" className="h-16 w-16 object-contain"/>
           </div>
           <span className="font-display text-lg font-semibold tracking-tight">
             SaneGreenEnergy
