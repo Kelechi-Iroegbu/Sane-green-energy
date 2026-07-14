@@ -11,18 +11,23 @@ const userRoutes = require("./Routes/userRoutes");
 const productRoutes = require("./Routes/productRoutes");
 const cartRoutes = require("./Routes/cartRoutes");
 const orderRoutes = require("./Routes/orderRoutes");
+const webhookRoutes = require("./Routes/webhookRoutes");
 
-// Seeing Green Energy API — dynamic products build
+// SaneGreenEnergy API
 connectDB();
 
 const app = express();
 
 app.use(cors(corsOptions));
-app.use(express.json());
 app.use(morgan("dev"));
 
+// Mounted before express.json() — Paystack webhook signature verification needs the raw request body.
+app.use("/api/webhooks", webhookRoutes);
+
+app.use(express.json());
+
 app.get("/", (req, res) => {
-  res.json({ message: "Seeing Green Energy API is running 🌿" });
+  res.json({ message: "SaneGreenEnergy API is running 🌿" });
 });
 
 app.use("/api/users", userRoutes);

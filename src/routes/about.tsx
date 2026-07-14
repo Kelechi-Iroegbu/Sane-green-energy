@@ -5,10 +5,10 @@ import aboutImg from "@/assets/about.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — SeeingGreen Energy" },
-      { name: "description", content: "We're engineers, scientists, and operators on a mission to make clean energy the default — not the exception." },
-      { property: "og:title", content: "About SeeingGreen Energy" },
-      { property: "og:description", content: "On a mission to make clean energy the default." },
+      { title: "About — SaneGreenEnergy" },
+      { name: "description", content: "We're engineers and installers on a mission to make reliable solar power the default for Nigerian homes and businesses." },
+      { property: "og:title", content: "About SaneGreenEnergy" },
+      { property: "og:description", content: "On a mission to make reliable solar power the default in Nigeria." },
       { property: "og:image", content: aboutImg },
       { name: "twitter:image", content: aboutImg },
     ],
@@ -17,92 +17,88 @@ export const Route = createFileRoute("/about")({
 });
 
 const values = [
-  { num: "01", title: "Engineered, not assembled", desc: "Every system is custom-modeled for your site. No cookie-cutter installs." },
-  { num: "02", title: "Radically transparent", desc: "Live dashboards. Open performance data. No greenwashing — ever." },
-  { num: "03", title: "Long-term aligned", desc: "30-year warranties because we plan to be around in 30 years." },
+  { num: "01", title: "Built for local conditions", desc: "Every system is sized for your actual usage and the realities of grid power in Nigeria — not a generic template." },
+  { num: "02", title: "Transparent pricing", desc: "Clear quotes, no hidden costs. You know exactly what you're paying for before you commit." },
+  { num: "03", title: "Long-term support", desc: "Warranties that last, and local technicians who'll actually pick up the phone." },
 ];
 
 const team = [
-  { name: "Aria Chen", role: "Founder & CEO", bio: "Ex-Tesla Energy. Built grid-scale storage in 14 countries." },
-  { name: "Marcus Okafor", role: "Chief Engineer", bio: "PhD photovoltaics, MIT. Holds 12 patents in panel optimization." },
-  { name: "Lena Vasquez", role: "Head of Operations", bio: "Scaled three solar startups from seed to series C." },
+  { name: "Chidi Okonkwo", role: "Co-Founder & CEO", bio: "10+ years in renewable energy project delivery across West Africa." },
+  { name: "Amina Bello", role: "Chief Engineer", bio: "Electrical engineer specializing in solar system design and battery storage." },
+  { name: "Tunde Adeyemi", role: "Head of Installations", bio: "Leads certified installer teams across Lagos, Abuja, and Port Harcourt." },
 ];
 
 function About() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-hero">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="font-mono text-xs uppercase tracking-widest text-primary">// About</span>
-            <h1 className="mt-4 font-display text-5xl md:text-7xl font-bold tracking-tighter max-w-4xl">
-              We see a planet that
-              <br />
-              <span className="text-primary text-glow">runs on sunlight</span>.
-            </h1>
-            <p className="mt-8 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-              Founded in 2021 by climate engineers who got tired of waiting. Today we deploy across three continents, with one mission: make clean energy the obvious choice.
-            </p>
-          </motion.div>
-        </div>
+      <section className="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-16">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">About</span>
+          <h1 className="mt-3 font-display text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] max-w-4xl">
+            Reliable power, made for Nigerian homes.
+          </h1>
+          <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            Founded to make solar power practical and affordable in Nigeria. We design, sell, and install systems that keep homes and businesses running through outages — not just brochures.
+          </p>
+        </motion.div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
-        <img
-          src={aboutImg}
-          alt="Engineers analyzing a green holographic globe"
-          width={1280}
-          height={960}
-          loading="lazy"
-          className="rounded-xl border border-glow shadow-glow"
-        />
+      <section className="mx-auto max-w-7xl px-6 pb-20 grid md:grid-cols-2 gap-12 items-center">
+        <div className="overflow-hidden rounded-3xl bg-card border border-border shadow-soft">
+          <img
+            src={aboutImg}
+            alt="SaneGreenEnergy engineers reviewing a solar installation"
+            width={1280}
+            height={960}
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+        </div>
         <div>
-          <span className="font-mono text-xs uppercase tracking-widest text-primary">// Our mission</span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-bold tracking-tight">
-            Decarbonize. <br />
-            <span className="text-primary">Profitably.</span>
+          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Our mission</span>
+          <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight">
+            Make solar the obvious choice.
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
-            We believe the energy transition isn't a sacrifice — it's the biggest economic opportunity of our generation. Our job is to make solar so smart, so reliable, and so beautiful that switching becomes inevitable.
+            Power outages cost Nigerian households and businesses time and money every day. We believe switching to solar shouldn't be complicated or overpriced — it should be the easy, obvious upgrade for anyone tired of the generator.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <span className="font-mono text-xs uppercase tracking-widest text-primary">// Principles</span>
-        <h2 className="mt-3 font-display text-4xl md:text-5xl font-bold tracking-tight mb-16">How we operate.</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+      <section className="mx-auto max-w-7xl px-6 pb-20">
+        <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Principles</span>
+        <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight mb-12">How we operate.</h2>
+        <div className="grid md:grid-cols-3 gap-5">
           {values.map((v, i) => (
             <motion.div
               key={v.num}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="rounded-xl border border-border/50 bg-card p-8"
+              transition={{ delay: i * 0.08 }}
+              className="rounded-2xl border border-border bg-card p-8"
             >
-              <div className="font-mono text-5xl font-bold text-primary/30">{v.num}</div>
-              <h3 className="mt-4 font-display text-xl font-semibold">{v.title}</h3>
+              <div className="font-display text-4xl font-bold text-muted-foreground/30">{v.num}</div>
+              <h3 className="mt-4 font-display text-lg font-semibold">{v.title}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <span className="font-mono text-xs uppercase tracking-widest text-primary">// Team</span>
-        <h2 className="mt-3 font-display text-4xl md:text-5xl font-bold tracking-tight mb-16">
-          Built by people who <span className="text-primary">ship</span>.
+      <section id="team" className="mx-auto max-w-7xl px-6 pb-24 scroll-mt-24">
+        <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Team</span>
+        <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight mb-12">
+          Built by people who install it themselves.
         </h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-5">
           {team.map((p) => (
-            <div key={p.name} className="rounded-xl border border-border/50 bg-card p-8 hover:border-glow transition-all">
-              <div className="h-32 w-32 mx-auto rounded-full bg-gradient-neon shadow-glow-sm mb-6 flex items-center justify-center font-display text-3xl font-bold text-primary-foreground">
+            <div key={p.name} className="rounded-2xl border border-border bg-card p-8 hover:shadow-card transition-all">
+              <div className="h-24 w-24 mx-auto rounded-full bg-primary text-primary-foreground mb-6 flex items-center justify-center font-display text-2xl font-bold">
                 {p.name.split(" ").map((n) => n[0]).join("")}
               </div>
-              <h3 className="text-center font-display text-xl font-semibold">{p.name}</h3>
-              <div className="text-center font-mono text-xs uppercase tracking-widest text-primary mt-1">{p.role}</div>
+              <h3 className="text-center font-display text-lg font-semibold">{p.name}</h3>
+              <div className="text-center text-xs uppercase tracking-widest text-muted-foreground mt-1">{p.role}</div>
               <p className="mt-4 text-sm text-muted-foreground text-center leading-relaxed">{p.bio}</p>
             </div>
           ))}

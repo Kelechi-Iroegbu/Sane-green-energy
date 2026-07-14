@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema(
       required: true,
       enum: ["Solar Panels", "Batteries", "Inverters", "Chargers", "Accessories"],
     },
-    brand: { type: String, default: "Seeing Green" },
+    brand: { type: String, default: "SaneGreenEnergy" },
     image: { type: String, required: true },
     price: { type: Number, required: true, min: 0 },
     originalPrice: { type: Number, default: 0 },
