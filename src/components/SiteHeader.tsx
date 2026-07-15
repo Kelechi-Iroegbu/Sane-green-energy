@@ -7,11 +7,11 @@ import saneLogo from "@/assets/Logo_Redesign.png";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 const nav = [
-  { to: "/", label: "Shop" },
+  { to: "/", label: "Home" },
   { to: "/products", label: "Products" },
   { to: "/solutions", label: "Solutions" },
   { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
+  { to: "/find-installer", label: "Find an Installer" },
 ] as const;
 
 export function SiteHeader() {

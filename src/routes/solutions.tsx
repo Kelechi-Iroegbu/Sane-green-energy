@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Home, Building2, Factory, ArrowRight, Check } from "lucide-react";
+import { Home, Building2, Factory, ArrowRight, Check, BatteryCharging } from "lucide-react";
 import solutionsImg from "@/assets/solutions.jpg";
+import productBattery from "@/assets/product-battery.jpg";
 
 export const Route = createFileRoute("/solutions")({
   head: () => ({
@@ -16,6 +17,27 @@ export const Route = createFileRoute("/solutions")({
   }),
   component: Solutions,
 });
+
+const batteryFeatures = [
+  "LiFePO4 (LFP) chemistry — safer and longer-lasting than standard lithium-ion or lead-acid",
+  "Integrated BMS with RS485 ×2 and CAN ports for inverter and remote-monitoring integration",
+  "Front-panel ALM (alarm), RUN, and SOC (state of charge) status indicators",
+  "Modular, stackable cabinet design on locking casters for easy install and relocation",
+  "Available in multiple capacity tiers so systems can grow with demand",
+];
+
+const batteryUseCases = [
+  "Home battery backup paired with a hybrid inverter",
+  "Expandable storage for commercial and small industrial sites",
+  "Off-grid and hybrid solar installs that need scalable capacity",
+];
+
+const batteryAdvantages = [
+  "Longer cycle life and better thermal stability than lead-acid or standard Li-ion",
+  "Real-time monitoring cuts down on guesswork and maintenance callouts",
+  "Stack additional units as power needs grow, without replacing the whole system",
+  "Locking casters make delivery, installation, and servicing straightforward",
+];
 
 const tiers = [
   {
@@ -88,13 +110,76 @@ function Solutions() {
                 ))}
               </ul>
               <Link
-                to="/contact"
+                to="/find-installer"
                 className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-widest hover:opacity-70 transition-opacity"
               >
                 Get Quote <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-24">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              <BatteryCharging className="h-4 w-4" /> Featured Storage Technology
+            </span>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight">
+              LFP Energy Storage Pack
+            </h2>
+            <p className="mt-6 text-muted-foreground leading-relaxed">
+              A stackable lithium iron phosphate (LiFePO4) battery module built for daily deep-cycle use in solar backup systems. Each unit ships with an integrated battery management system and a front-panel display, so the system it's protecting stays visible instead of hidden inside a cabinet.
+            </p>
+
+            <h3 className="mt-8 text-sm font-semibold uppercase tracking-widest text-muted-foreground">Features</h3>
+            <ul className="mt-4 space-y-2.5">
+              {batteryFeatures.map((f) => (
+                <li key={f} className="flex gap-3 text-sm leading-relaxed">
+                  <Check className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="mt-8 text-sm font-semibold uppercase tracking-widest text-muted-foreground">Where it's used</h3>
+            <ul className="mt-4 space-y-2.5">
+              {batteryUseCases.map((u) => (
+                <li key={u} className="flex gap-3 text-sm leading-relaxed">
+                  <span>→</span>
+                  <span>{u}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="mt-8 text-sm font-semibold uppercase tracking-widest text-muted-foreground">Advantages</h3>
+            <ul className="mt-4 space-y-2.5">
+              {batteryAdvantages.map((a) => (
+                <li key={a} className="flex gap-3 text-sm leading-relaxed">
+                  <span>→</span>
+                  <span>{a}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              to="/find-installer"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              Ask about the LFP Storage Pack <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="overflow-hidden rounded-3xl bg-card border border-border shadow-soft">
+            <img
+              src={productBattery}
+              alt="LFP Energy Storage Pack — stackable lithium iron phosphate battery module"
+              width={1280}
+              height={960}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
       </section>
 

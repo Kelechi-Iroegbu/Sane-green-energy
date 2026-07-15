@@ -13,14 +13,14 @@ const companyLinks = [
   { label: "About Us", to: "/about" as const },
   { label: "Solutions", to: "/solutions" as const },
   { label: "Shop", to: "/products" as const },
-  { label: "Contact", to: "/contact" as const },
+  { label: "Find an Installer", to: "/find-installer" as const },
 ];
 
 const supportLinks = [
   { label: "Warranty", to: "/solutions" as const },
   { label: "Installation", to: "/solutions" as const },
-  { label: "Financing", to: "/contact" as const },
-  { label: "FAQs", to: "/contact" as const },
+  { label: "Financing", to: "/find-installer" as const },
+  { label: "FAQs", to: "/find-installer" as const },
 ];
 
 export function SiteFooter() {

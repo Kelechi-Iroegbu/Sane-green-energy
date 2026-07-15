@@ -58,10 +58,10 @@ export const Route = createFileRoute("/")({
 
 const navLinks = [
   { label: "Home", to: "/" as const },
-  { label: "Shop", to: "/products" as const },
+  { label: "Products", to: "/products" as const },
   { label: "Solutions", to: "/solutions" as const },
   { label: "About", to: "/about" as const },
-  { label: "Contact", to: "/contact" as const },
+  { label: "Find an Installer", to: "/find-installer" as const },
 ];
 
 const categories = [
@@ -144,7 +144,7 @@ function Home() {
               <User className="h-4.5 w-4.5" />
             </Link>
             <Link
-              to="/contact"
+              to="/find-installer"
               className="hidden sm:inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
             >
               Get a Free Quote
@@ -173,7 +173,7 @@ function Home() {
                 </SheetClose>
               ))}
               <SheetClose asChild>
-                <Link to="/contact" className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-base font-medium text-primary-foreground">
+                <Link to="/find-installer" className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-base font-medium text-primary-foreground">
                   Get a Free Quote
                 </Link>
               </SheetClose>

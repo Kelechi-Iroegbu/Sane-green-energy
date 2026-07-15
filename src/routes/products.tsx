@@ -8,6 +8,13 @@ import { useCart } from "@/context/CartContext";
 import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
 
 const API_URL = import.meta.env.VITE_API_URL || "/api";
+const API_ORIGIN = API_URL.replace(/\/api\/?$/, "");
+
+function resolveImage(image: string | undefined) {
+  if (!image) return undefined;
+  if (/^https?:\/\//.test(image)) return image;
+  return `${API_ORIGIN}${image.startsWith("/") ? "" : "/"}${image}`;
+}
 
 type Product = {
   _id: string;
@@ -187,7 +194,7 @@ function ProductsPage() {
                     rating: p.rating ?? 0,
                     reviews: p.numReviews ?? 0,
                     badge: p.featured ? "Featured" : undefined,
-                    image: p.image || productPanel,
+                    image: resolveImage(p.image) || productPanel,
                   }}
                   onAdd={(item) =>
                     addItem({
@@ -203,7 +210,7 @@ function ProductsPage() {
           )}
 
           <div className="mt-12 flex justify-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-xs uppercase tracking-widest hover:bg-secondary">
+            <Link to="/find-installer" className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-xs uppercase tracking-widest hover:bg-secondary">
               Need a custom system? Get a quote <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
