@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartDrawer } from "@/components/CartDrawer";
+import { CustomerCareWidget } from "@/components/CustomerCareWidget";
 
 import appCss from "../styles.css?url";
 
@@ -91,6 +92,7 @@ function RootComponent() {
             </main>
             <SiteFooter />
             <CartDrawer />
+            <CustomerCareWidget />
           </div>
         </CartProvider>
       </AuthProvider>

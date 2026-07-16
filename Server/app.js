@@ -1,4 +1,5 @@
 require("dotenv").config();
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -12,6 +13,7 @@ const productRoutes = require("./Routes/productRoutes");
 const cartRoutes = require("./Routes/cartRoutes");
 const orderRoutes = require("./Routes/orderRoutes");
 const webhookRoutes = require("./Routes/webhookRoutes");
+const supportRoutes = require("./Routes/supportRoutes");
 
 // SaneGreenEnergy API
 connectDB();
@@ -25,6 +27,7 @@ app.use(morgan("dev"));
 app.use("/api/webhooks", webhookRoutes);
 
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 app.get("/", (req, res) => {
   res.json({ message: "SaneGreenEnergy API is running 🌿" });
@@ -34,6 +37,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/support", supportRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
