@@ -7,6 +7,7 @@ const supportTicketSchema = new mongoose.Schema(
     category: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
     status: { type: String, enum: ["new", "in_progress", "resolved"], default: "new" },
+    priority: { type: String, enum: ["normal", "high"], default: "normal" },
   },
   { timestamps: true }
 );
