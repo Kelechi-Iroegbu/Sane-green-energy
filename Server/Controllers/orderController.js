@@ -21,7 +21,7 @@ const createOrder = asyncHandler(async (req, res) => {
   }));
 
   const itemsPrice = orderItems.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const shippingPrice = itemsPrice > 100000 ? 0 : 5000;
+  const shippingPrice = 0; // Shipping is free — tracked explicitly rather than omitted.
   const totalPrice = itemsPrice + shippingPrice;
 
   const order = await Order.create({
