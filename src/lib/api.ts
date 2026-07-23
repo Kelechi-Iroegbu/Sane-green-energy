@@ -1,4 +1,11 @@
 const API_URL = import.meta.env.VITE_API_URL || "/api";
+const API_ORIGIN = API_URL.replace(/\/api\/?$/, "");
+
+export function resolveImage(image: string | undefined) {
+  if (!image) return undefined;
+  if (/^https?:\/\//.test(image)) return image;
+  return `${API_ORIGIN}${image.startsWith("/") ? "" : "/"}${image}`;
+}
 
 export class ApiError extends Error {
   status: number;

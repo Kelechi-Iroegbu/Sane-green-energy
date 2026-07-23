@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
@@ -28,13 +29,31 @@ import heroHome from "@/assets/hero-home.jpg";
 import teamEngineers from "@/assets/team-engineers.jpg";
 import premiumInstall from "@/assets/premium-install.jpg";
 import productPanel from "@/assets/product-panel.jpg";
-import productBattery from "@/assets/product-battery.jpg";
-import productInverter from "@/assets/product-inverter.jpg";
-import productCharger from "@/assets/product-charger.jpg";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useAddToCart } from "@/hooks/use-add-to-cart";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "@/components/SocialIcons";
-import { ProductCard } from "@/components/ProductCard";
+import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
+import { resolveImage } from "@/lib/api";
+
+const API_URL = import.meta.env.VITE_API_URL || "/api";
+
+type FeaturedProduct = {
+  _id: string;
+  name: string;
+  category: string;
+  price: number;
+  originalPrice?: number;
+  rating?: number;
+  numReviews?: number;
+  image?: string;
+  featured?: boolean;
+};
+
+async function fetchFeaturedProducts() {
+  const res = await fetch(`${API_URL}/products?featured=true`);
+  if (!res.ok) throw new Error("Failed to load products");
+  return (await res.json()) as FeaturedProduct[];
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -73,13 +92,6 @@ const categories = [
   { icon: Sparkles, label: "Smart Home", count: "92" },
 ];
 
-const products = [
-  { id: 1, name: "Helios X9 Mono Panel 450W", category: "Solar Panels", price: 185000, oldPrice: 219000, rating: 4.8, reviews: 1240, badge: "Best Seller", img: productPanel },
-  { id: 2, name: "PowerWall Quantum 13.5kWh", category: "Batteries", price: 4800000, oldPrice: 5600000, rating: 4.9, reviews: 562, badge: "−15%", img: productBattery },
-  { id: 3, name: "FluxCore Hybrid Inverter 10kW", category: "Inverters", price: 1750000, oldPrice: 2000000, rating: 4.7, reviews: 318, badge: "New", img: productInverter },
-  { id: 4, name: "VoltLink EV Charger 22kW", category: "EV Chargers", price: 650000, oldPrice: 780000, rating: 4.8, reviews: 980, badge: "Prime Ship", img: productCharger },
-];
-
 const whyChoose = [
   { icon: ShieldCheck, t: "Certified Products", d: "Every panel, battery and inverter is tested and warrantied." },
   { icon: BadgePercent, t: "Best Price", d: "Transparent Naira pricing with no hidden install fees." },
@@ -97,6 +109,11 @@ function Home() {
   const addToCart = useAddToCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
+  const featuredQuery = useQuery({
+    queryKey: ["products", "featured"],
+    queryFn: fetchFeaturedProducts,
+  });
+  const featuredProducts = featuredQuery.data ?? [];
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif" }} className="bg-secondary/60 px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
@@ -337,9 +354,31 @@ function Home() {
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {products.map((p) => (
-              <ProductCard key={p.id} product={{ ...p, image: p.img }} onAdd={addToCart} />
-            ))}
+            {featuredQuery.isLoading ? (
+              Array.from({ length: 4 }).map((_, i) => <ProductCardSkeleton key={i} />)
+            ) : featuredProducts.length === 0 ? (
+              <p className="col-span-full text-center text-sm text-muted-foreground">
+                No featured products yet — check back soon.
+              </p>
+            ) : (
+              featuredProducts.slice(0, 4).map((p) => (
+                <ProductCard
+                  key={p._id}
+                  product={{
+                    id: p._id,
+                    name: p.name,
+                    category: p.category,
+                    price: p.price,
+                    oldPrice: p.originalPrice,
+                    rating: p.rating ?? 0,
+                    reviews: p.numReviews ?? 0,
+                    badge: "Featured",
+                    image: resolveImage(p.image) || productPanel,
+                  }}
+                  onAdd={addToCart}
+                />
+              ))
+            )}
           </div>
         </div>
 

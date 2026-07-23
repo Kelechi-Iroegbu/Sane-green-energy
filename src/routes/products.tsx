@@ -6,15 +6,9 @@ import productPanel from "@/assets/product-panel.jpg";
 import premiumInstall from "@/assets/premium-install.jpg";
 import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
 import { useAddToCart } from "@/hooks/use-add-to-cart";
+import { resolveImage } from "@/lib/api";
 
 const API_URL = import.meta.env.VITE_API_URL || "/api";
-const API_ORIGIN = API_URL.replace(/\/api\/?$/, "");
-
-function resolveImage(image: string | undefined) {
-  if (!image) return undefined;
-  if (/^https?:\/\//.test(image)) return image;
-  return `${API_ORIGIN}${image.startsWith("/") ? "" : "/"}${image}`;
-}
 
 type Product = {
   _id: string;

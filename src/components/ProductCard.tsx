@@ -1,7 +1,7 @@
 import { Heart, MapPin, ShieldCheck, ShoppingCart, Star } from "lucide-react";
 
 export type ProductCardData = {
-  id: string | number;
+  id: string;
   name: string;
   category: string;
   price: number;
