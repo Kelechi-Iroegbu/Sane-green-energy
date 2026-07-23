@@ -2,7 +2,9 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { UserPlus } from "lucide-react";
+import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 import { ApiError } from "@/lib/api";
 
 type RegisterSearch = { redirect?: string };
@@ -19,6 +21,7 @@ export const Route = createFileRoute("/register")({
 
 function RegisterPage() {
   const { register } = useAuth();
+  const { pendingItem, addItem, setPendingItem } = useCart();
   const navigate = useNavigate();
   const { redirect } = Route.useSearch();
 
@@ -34,7 +37,12 @@ function RegisterPage() {
     setLoading(true);
     try {
       await register(name, email, password);
-      navigate({ to: redirect || "/" });
+      if (pendingItem) {
+        addItem(pendingItem);
+        toast.success("Added to cart", { description: pendingItem.name });
+        setPendingItem(null);
+      }
+      navigate({ to: redirect || "/dashboard" });
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
     } finally {

@@ -2,7 +2,9 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { LogIn } from "lucide-react";
+import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 import { ApiError } from "@/lib/api";
 
 type LoginSearch = { redirect?: string };
@@ -19,6 +21,7 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const { login } = useAuth();
+  const { pendingItem, addItem, setPendingItem } = useCart();
   const navigate = useNavigate();
   const { redirect } = Route.useSearch();
 
@@ -33,7 +36,12 @@ function LoginPage() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate({ to: redirect || "/" });
+      if (pendingItem) {
+        addItem(pendingItem);
+        toast.success("Added to cart", { description: pendingItem.name });
+        setPendingItem(null);
+      }
+      navigate({ to: redirect || "/dashboard" });
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
     } finally {

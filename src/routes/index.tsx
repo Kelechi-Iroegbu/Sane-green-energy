@@ -31,8 +31,8 @@ import productPanel from "@/assets/product-panel.jpg";
 import productBattery from "@/assets/product-battery.jpg";
 import productInverter from "@/assets/product-inverter.jpg";
 import productCharger from "@/assets/product-charger.jpg";
-import { useCart } from "@/context/CartContext";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { useAddToCart } from "@/hooks/use-add-to-cart";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "@/components/SocialIcons";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -94,7 +94,7 @@ const testimonials = [
 ];
 
 function Home() {
-  const { addItem } = useCart();
+  const addToCart = useAddToCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
 
@@ -338,7 +338,7 @@ function Home() {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((p) => (
-              <ProductCard key={p.id} product={{ ...p, image: p.img }} onAdd={(item) => addItem({ id: item.id as number, name: item.name, price: item.price, img: item.image })} />
+              <ProductCard key={p.id} product={{ ...p, image: p.img }} onAdd={addToCart} />
             ))}
           </div>
         </div>

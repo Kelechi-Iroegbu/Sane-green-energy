@@ -8,6 +8,8 @@ export type CartItem = {
   qty: number;
 };
 
+export type PendingCartItem = Omit<CartItem, "qty">;
+
 type CartContextValue = {
   items: CartItem[];
   isOpen: boolean;
@@ -19,6 +21,10 @@ type CartContextValue = {
   clear: () => void;
   count: number;
   subtotal: number;
+  // Set when an unauthenticated user clicks "Add to Cart" — the login/register
+  // pages add it to the cart once the user is authenticated, then clear it.
+  pendingItem: PendingCartItem | null;
+  setPendingItem: (item: PendingCartItem | null) => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -26,6 +32,7 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [pendingItem, setPendingItem] = useState<PendingCartItem | null>(null);
 
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
@@ -72,6 +79,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     clear,
     count,
     subtotal,
+    pendingItem,
+    setPendingItem,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

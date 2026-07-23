@@ -12,6 +12,12 @@ const allowedOriginPatterns = [
   /^https:\/\/([a-z0-9-]+\.)*pages\.dev$/i,
 ];
 
+// Local dev servers run on a sandbox-assigned port that changes between sessions —
+// allow any localhost/127.0.0.1 port outside production instead of hardcoding one.
+if (process.env.NODE_ENV !== "production") {
+  allowedOriginPatterns.push(/^https?:\/\/(localhost|127\.0\.0\.1):\d+$/i);
+}
+
 const corsOptions = {
   origin: (origin, callback) => {
     // allow requests with no origin (curl, mobile apps, server-to-server)

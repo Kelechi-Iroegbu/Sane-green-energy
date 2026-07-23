@@ -89,7 +89,19 @@ const verifyPayment = asyncHandler(async (req, res) => {
 
 // GET /api/orders/mine
 const getMyOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
+  // Stale "pending" orders (abandoned checkouts that never completed) are hidden
+  // from order history after 24h — paid/failed orders are always shown regardless
+  // of age. Nothing is deleted; this is a query filter only.
+  const pendingCutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+  const orders = await Order.find({
+    user: req.user._id,
+    $or: [
+      { paymentStatus: { $ne: "pending" } },
+      { paymentStatus: "pending", createdAt: { $gte: pendingCutoff } },
+    ],
+  }).sort({ createdAt: -1 });
+
   res.json(orders);
 });
 

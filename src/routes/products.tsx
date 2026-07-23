@@ -4,8 +4,8 @@ import { Search, ArrowRight, Clock } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import productPanel from "@/assets/product-panel.jpg";
 import premiumInstall from "@/assets/premium-install.jpg";
-import { useCart } from "@/context/CartContext";
 import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard";
+import { useAddToCart } from "@/hooks/use-add-to-cart";
 
 const API_URL = import.meta.env.VITE_API_URL || "/api";
 const API_ORIGIN = API_URL.replace(/\/api\/?$/, "");
@@ -74,7 +74,7 @@ function useSlowLoad(isLoading: boolean, delay = 4000) {
 }
 
 function ProductsPage() {
-  const { addItem } = useCart();
+  const addToCart = useAddToCart();
   const [active, setActive] = useState<string>("All");
   const [query, setQuery] = useState("");
   const [debounced, setDebounced] = useState("");
@@ -196,14 +196,7 @@ function ProductsPage() {
                     badge: p.featured ? "Featured" : undefined,
                     image: resolveImage(p.image) || productPanel,
                   }}
-                  onAdd={(item) =>
-                    addItem({
-                      id: item.id as unknown as number,
-                      name: item.name,
-                      price: item.price,
-                      img: item.image,
-                    })
-                  }
+                  onAdd={addToCart}
                 />
               ))}
             </div>
