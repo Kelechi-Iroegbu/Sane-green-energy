@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import {
   ShoppingBag,
   Package,
@@ -10,10 +11,11 @@ import {
   LogOut,
   ChevronDown,
   ArrowRight,
+  Download,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
-import { apiFetch } from "@/lib/api";
+import { apiFetch, apiFetchBlob, ApiError } from "@/lib/api";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -203,7 +205,28 @@ function DashboardPage() {
 
 function OrderCard({ order }: { order: Order }) {
   const [expanded, setExpanded] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const status = getOrderStatus(order);
+
+  const handleDownloadReceipt = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDownloading(true);
+    try {
+      const blob = await apiFetchBlob(`/orders/${order._id}/receipt`);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `receipt-${order._id}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      toast.error(err instanceof ApiError ? err.message : "Couldn't download receipt. Please try again.");
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   return (
     <li className="rounded-2xl border border-border bg-card shadow-card">
@@ -269,6 +292,16 @@ function OrderCard({ order }: { order: Order }) {
             </span>
             <span>Ref: {order.paymentReference || "—"}</span>
           </div>
+          {order.isPaid && (
+            <button
+              type="button"
+              onClick={handleDownloadReceipt}
+              disabled={downloading}
+              className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-xs uppercase tracking-widest hover:bg-secondary transition-colors disabled:opacity-60"
+            >
+              <Download className="h-3.5 w-3.5" /> {downloading ? "Preparing…" : "Download Receipt"}
+            </button>
+          )}
         </div>
       )}
     </li>

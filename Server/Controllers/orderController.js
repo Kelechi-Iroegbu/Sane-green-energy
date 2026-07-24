@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Order = require("../Models/Order");
 const { initializeTransaction, verifyTransaction } = require("../config/paystack");
 const { markOrderPaid, markOrderFailed } = require("../services/orderService");
+const { generateReceiptPDF } = require("../services/receiptService");
 
 // POST /api/orders   body: { items, shippingAddress, paymentMethod }
 const createOrder = asyncHandler(async (req, res) => {
@@ -124,4 +125,26 @@ const getOrderById = asyncHandler(async (req, res) => {
   res.json(order);
 });
 
-module.exports = { createOrder, getMyOrders, getOrderById, verifyPayment };
+// GET /api/orders/:id/receipt
+const getOrderReceipt = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id).populate("user", "name email");
+  if (!order) {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+  if (order.user._id.toString() !== req.user._id.toString() && !req.user.isAdmin) {
+    res.status(403);
+    throw new Error("Not authorized");
+  }
+  if (!order.isPaid) {
+    res.status(400);
+    throw new Error("Receipt is only available for paid orders");
+  }
+
+  const pdfBuffer = await generateReceiptPDF(order);
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", `attachment; filename="receipt-${order._id}.pdf"`);
+  res.send(pdfBuffer);
+});
+
+module.exports = { createOrder, getMyOrders, getOrderById, verifyPayment, getOrderReceipt };

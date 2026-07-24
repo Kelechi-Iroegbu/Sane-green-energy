@@ -36,3 +36,18 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}): Prom
 
   return data as T;
 }
+
+export async function apiFetchBlob(path: string): Promise<Blob> {
+  const token = typeof window !== "undefined" ? localStorage.getItem("sane_token") : null;
+
+  const res = await fetch(`${API_URL}${path}`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new ApiError(data.message || "Request failed", res.status);
+  }
+
+  return res.blob();
+}

@@ -1,4 +1,6 @@
 const Product = require("../Models/Product");
+const { generateReceiptPDF } = require("./receiptService");
+const { sendReceiptEmail } = require("./emailService");
 
 async function markOrderPaid(order, paystackData) {
   order.isPaid = true;
@@ -18,6 +20,16 @@ async function markOrderPaid(order, paystackData) {
       Product.updateOne({ _id: item.product }, { $inc: { countInStock: -item.qty } })
     )
   );
+
+  // Receipt email is best-effort — a failure here must never undo the payment
+  // confirmation above (the webhook path especially: Paystack retries on non-2xx).
+  try {
+    await order.populate("user", "name email");
+    const pdfBuffer = await generateReceiptPDF(order);
+    await sendReceiptEmail({ order, pdfBuffer });
+  } catch (err) {
+    console.error(`Receipt email failed for order ${order._id}:`, err.message);
+  }
 }
 
 async function markOrderFailed(order) {
