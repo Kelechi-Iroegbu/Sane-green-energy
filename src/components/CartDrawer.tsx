@@ -112,7 +112,7 @@ export function CartDrawer() {
                   <span className="text-xs uppercase tracking-widest text-muted-foreground">Subtotal</span>
                   <span className="font-display text-2xl font-bold">₦{subtotal.toLocaleString()}</span>
                 </div>
-                <p className="mt-1 text-xs text-muted-foreground">Shipping & taxes calculated at checkout.</p>
+                <p className="mt-1 text-xs text-muted-foreground">Free shipping on all orders.</p>
                 <button
                   onClick={onCheckout}
                   className="mt-4 w-full rounded-full bg-primary py-3 text-xs uppercase tracking-widest text-primary-foreground hover:opacity-90"

@@ -126,9 +126,19 @@ function DashboardPage() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-                    <span className="text-xs uppercase tracking-widest text-muted-foreground">Subtotal</span>
-                    <span className="font-display text-lg font-bold">₦{subtotal.toLocaleString()}</span>
+                  <div className="mt-4 space-y-2 border-t border-border pt-4">
+                    <div className="flex items-baseline justify-between text-sm">
+                      <span className="text-muted-foreground">Subtotal</span>
+                      <span className="font-medium">₦{subtotal.toLocaleString()}</span>
+                    </div>
+                    <div className="flex items-baseline justify-between text-sm">
+                      <span className="text-muted-foreground">Shipping</span>
+                      <span className="font-medium">Free</span>
+                    </div>
+                    <div className="flex items-baseline justify-between border-t border-border pt-2">
+                      <span className="text-xs uppercase tracking-widest text-muted-foreground">Total</span>
+                      <span className="font-display text-lg font-bold">₦{subtotal.toLocaleString()}</span>
+                    </div>
                   </div>
                   <Link
                     to="/checkout"
