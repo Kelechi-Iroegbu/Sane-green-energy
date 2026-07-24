@@ -24,6 +24,11 @@ const createOrder = asyncHandler(async (req, res) => {
   const shippingPrice = 0; // Shipping is free — tracked explicitly rather than omitted.
   const totalPrice = itemsPrice + shippingPrice;
 
+  // Temporary diagnostic for the Paystack amount-doubling investigation — remove once resolved.
+  console.log(
+    `[createOrder] commit=${process.env.RENDER_GIT_COMMIT || "unknown"} itemsPrice=${itemsPrice} shippingPrice=${shippingPrice} totalPrice=${totalPrice} amountKobo=${Math.round(totalPrice * 100)}`
+  );
+
   const order = await Order.create({
     user: req.user._id,
     items: orderItems,
