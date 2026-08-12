@@ -91,7 +91,7 @@ function RootComponent() {
             <main className="flex-1">
               <Outlet />
             </main>
-            <SiteFooter />
+            {!isLandingPage && <SiteFooter />}
             <CartDrawer />
             <CustomerCareWidget />
             <Toaster />
