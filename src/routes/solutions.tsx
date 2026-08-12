@@ -69,7 +69,7 @@ const tiers = [
 function Solutions() {
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-16">
+      <section className="mx-auto max-w-[1600px] px-6 pt-12 pb-8 md:pt-16">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Solutions</span>
           <h1 className="mt-3 font-display text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
@@ -81,7 +81,7 @@ function Solutions() {
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-20">
+      <section className="mx-auto max-w-[1600px] px-6 pb-20">
         <div className="grid lg:grid-cols-3 gap-5">
           {tiers.map((t, i) => (
             <motion.div
@@ -120,7 +120,7 @@ function Solutions() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-24">
+      <section className="mx-auto max-w-[1600px] px-6 pb-24">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -183,7 +183,7 @@ function Solutions() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-24">
+      <section className="mx-auto max-w-[1600px] px-6 pb-24">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="overflow-hidden rounded-3xl bg-card border border-border shadow-soft">
             <img

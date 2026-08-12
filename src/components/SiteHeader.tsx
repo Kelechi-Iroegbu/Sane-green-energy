@@ -1,77 +1,90 @@
 import { Link } from "@tanstack/react-router";
-import { ShoppingCart, Menu, User, LogOut } from "lucide-react";
+import { Menu, Heart, User, ArrowRight, ChevronDown, ShoppingCart, LogOut, Leaf } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-import saneLogo from "@/assets/Logo_Redesign.png";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
-const nav = [
-  { to: "/", label: "Home" },
-  { to: "/products", label: "Products" },
-  { to: "/solutions", label: "Solutions" },
-  { to: "/about", label: "About" },
-  { to: "/find-installer", label: "Find an Installer" },
-] as const;
+const navLinks = [
+  { label: "Home", to: "/" as const },
+  { label: "Products", to: "/products" as const },
+  { label: "Savings", to: "/solutions" as const },
+  { label: "Find an Installer", to: "/find-installer" as const },
+];
 
 export function SiteHeader() {
   const { count, openCart } = useCart();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-4 sm:px-6">
-        <Link to="/" className="flex min-w-0 items-center gap-2 group">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white md:h-12 md:w-12">
-            <img src={saneLogo} alt="SaneGreenEnergy Logo" className="h-10 w-10 object-contain md:h-12 md:w-12" />
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+      <div className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-6 sm:px-8">
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+            <Leaf className="h-4 w-4 text-primary-foreground" />
           </div>
-          <span className="truncate font-display text-base font-semibold tracking-tight md:text-lg">
-            SaneGreenEnergy
-          </span>
+          <span className="text-lg font-bold tracking-tight">SaneGreenEnergy</span>
         </Link>
-        <nav className="hidden lg:flex items-center gap-1 text-sm">
-          {nav.map((n) => (
+        <nav className="hidden md:flex items-center gap-8 text-sm text-foreground/80">
+          {navLinks.map((n) => (
             <Link
-              key={n.to}
+              key={n.label}
               to={n.to}
-              className="px-4 py-2 rounded-full text-muted-foreground transition-colors hover:text-foreground hover:bg-secondary"
-              activeProps={{ className: "px-4 py-2 rounded-full !text-primary-foreground !bg-primary" }}
+              className="border-b-2 border-transparent pb-1 transition-colors hover:text-foreground"
+              activeProps={{ className: "border-b-2 !border-primary pb-1 !text-primary font-semibold" }}
               activeOptions={{ exact: true }}
             >
               {n.label}
             </Link>
           ))}
+          <a href="#" onClick={(e) => e.preventDefault()} className="flex items-center gap-1 transition-colors hover:text-foreground">
+            Resources <ChevronDown className="h-3.5 w-3.5" />
+          </a>
         </nav>
-        <div className="flex shrink-0 items-center gap-2">
-          {isAuthenticated ? (
-            <div className="hidden lg:flex items-center gap-1 text-sm text-muted-foreground">
-              <span>Hi, {user?.name.split(" ")[0]}</span>
-              <button
-                onClick={logout}
-                aria-label="Log out"
-                className="rounded-full p-2 hover:bg-secondary hover:text-foreground"
-              >
-                <LogOut className="h-4 w-4" />
-              </button>
-            </div>
-          ) : (
-            <Link
-              to="/login"
-              className="hidden lg:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-secondary"
-            >
-              <User className="h-4 w-4" /> Log in
-            </Link>
-          )}
+        <div className="flex items-center gap-1.5">
+          <button aria-label="Wishlist" className="hidden h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-secondary hover:text-foreground sm:inline-flex">
+            <Heart className="h-4.5 w-4.5" />
+          </button>
           <button
             aria-label="Cart"
             onClick={openCart}
-            className="relative inline-flex items-center gap-2 rounded-full bg-primary px-3.5 py-2 text-xs uppercase tracking-widest text-primary-foreground hover:opacity-90 sm:px-5"
+            className="relative hidden h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-secondary hover:text-foreground sm:inline-flex"
           >
-            <ShoppingCart className="h-4 w-4" />
-            <span className="hidden sm:inline">Cart · {count}</span>
+            <ShoppingCart className="h-4.5 w-4.5" />
             {count > 0 && (
-              <span className="sm:hidden absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-background px-1 text-[10px] font-bold text-foreground border border-foreground">
+              <span className="absolute -top-0.5 -right-0.5 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+                {count}
+              </span>
+            )}
+          </button>
+          {isAuthenticated ? (
+            <button
+              aria-label="Log out"
+              onClick={logout}
+              className="hidden h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-secondary hover:text-foreground sm:inline-flex"
+            >
+              <LogOut className="h-4.5 w-4.5" />
+            </button>
+          ) : (
+            <Link to="/login" aria-label="Account" className="hidden h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-secondary hover:text-foreground sm:inline-flex">
+              <User className="h-4.5 w-4.5" />
+            </Link>
+          )}
+          <Link
+            to="/find-installer"
+            className="ml-1 hidden sm:inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
+          >
+            Get a Free Quote <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+          <button
+            aria-label="Cart"
+            onClick={openCart}
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-secondary hover:text-foreground sm:hidden"
+          >
+            <ShoppingCart className="h-4.5 w-4.5" />
+            {count > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
                 {count}
               </span>
             )}
@@ -79,7 +92,7 @@ export function SiteHeader() {
           <button
             aria-label="Open menu"
             onClick={() => setMenuOpen(true)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground hover:bg-secondary lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground hover:bg-secondary md:hidden"
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -89,45 +102,27 @@ export function SiteHeader() {
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
         <SheetContent side="right" className="w-4/5 sm:max-w-xs">
           <SheetHeader>
-            <SheetTitle className="font-display">Menu</SheetTitle>
+            <SheetTitle>Menu</SheetTitle>
           </SheetHeader>
           <nav className="mt-6 flex flex-col gap-1">
-            {nav.map((n) => (
-              <SheetClose asChild key={n.to}>
+            {navLinks.map((n) => (
+              <SheetClose asChild key={n.label}>
                 <Link
                   to={n.to}
                   className="rounded-lg px-4 py-3 text-base text-foreground hover:bg-secondary"
-                  activeProps={{ className: "rounded-lg px-4 py-3 text-base !bg-primary !text-primary-foreground" }}
+                  activeProps={{ className: "rounded-lg px-4 py-3 text-base !text-primary font-semibold" }}
                   activeOptions={{ exact: true }}
                 >
                   {n.label}
                 </Link>
               </SheetClose>
             ))}
+            <SheetClose asChild>
+              <Link to="/find-installer" className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-base font-medium text-primary-foreground">
+                Get a Free Quote
+              </Link>
+            </SheetClose>
           </nav>
-          <div className="mt-6 border-t border-border pt-6">
-            {isAuthenticated ? (
-              <div className="flex items-center justify-between px-4">
-                <span className="text-sm text-muted-foreground">Hi, {user?.name.split(" ")[0]}</span>
-                <button
-                  onClick={logout}
-                  aria-label="Log out"
-                  className="rounded-full p-2 text-muted-foreground hover:bg-secondary hover:text-foreground"
-                >
-                  <LogOut className="h-4 w-4" />
-                </button>
-              </div>
-            ) : (
-              <SheetClose asChild>
-                <Link
-                  to="/login"
-                  className="flex items-center gap-2 rounded-lg px-4 py-3 text-base text-foreground hover:bg-secondary"
-                >
-                  <User className="h-4 w-4" /> Log in
-                </Link>
-              </SheetClose>
-            )}
-          </div>
         </SheetContent>
       </Sheet>
     </header>

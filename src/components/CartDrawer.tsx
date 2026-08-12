@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
+import { X, Minus, Plus, Trash2, ShoppingBag, Package } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
@@ -63,8 +63,12 @@ export function CartDrawer() {
                 <ul className="space-y-4">
                   {items.map((i) => (
                     <li key={i.id} className="flex gap-4 rounded-xl border border-border bg-background p-3">
-                      <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-secondary">
-                        <img src={i.img} alt={i.name} className="h-full w-full object-cover" />
+                      <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-secondary">
+                        {i.img ? (
+                          <img src={i.img} alt={i.name} className="h-full w-full object-cover" />
+                        ) : (
+                          <Package className="h-7 w-7 text-primary/50" strokeWidth={1.25} />
+                        )}
                       </div>
                       <div className="flex flex-1 flex-col">
                         <div className="flex items-start justify-between gap-2">

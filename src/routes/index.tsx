@@ -2,18 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import {
-  Menu,
   Star,
   Zap,
   Sun,
   Battery,
   Cpu,
-  Plug,
   ArrowRight,
   Leaf,
-  Heart,
-  User,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   MapPin,
@@ -21,9 +16,6 @@ import {
   Award,
   Headphones,
   Lock,
-  FileText,
-  Briefcase,
-  Truck,
   Quote,
   Home as HomeIcon,
   MessageCircle,
@@ -37,10 +29,11 @@ import {
 } from "lucide-react";
 import heroHome from "@/assets/hero-home.jpg";
 import ecoHome from "@/assets/eco-home.jpg";
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useAddToCart } from "@/hooks/use-add-to-cart";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "@/components/SocialIcons";
+import { BenefitsStrip } from "@/components/BenefitsStrip";
 import { resolveImage } from "@/lib/api";
+import { iconForCategory } from "@/lib/category-icons";
 
 const API_URL = import.meta.env.VITE_API_URL || "/api";
 
@@ -76,33 +69,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const navLinks = [
-  { label: "Home", to: "/" as const },
-  { label: "Products", to: "/products" as const },
-  { label: "Savings", to: "/solutions" as const },
-  { label: "Find an Installer", to: "/find-installer" as const },
-];
-
-const categoryIcon: Record<string, typeof Sun> = {
-  panel: Sun,
-  panels: Sun,
-  solar: Sun,
-  battery: Battery,
-  batteries: Battery,
-  inverter: Cpu,
-  inverters: Cpu,
-  charger: Plug,
-  chargers: Plug,
-};
-
-function iconForCategory(category: string) {
-  const key = category?.toLowerCase() ?? "";
-  for (const [needle, icon] of Object.entries(categoryIcon)) {
-    if (key.includes(needle)) return icon;
-  }
-  return Zap;
-}
-
 const fallbackProducts = [
   { id: "fallback-1", name: "Solar Panel – 550W", category: "Solar Panels", desc: "High efficiency monocrystalline panel", price: 265000, icon: Sun, badge: undefined as string | undefined },
   { id: "fallback-2", name: "Solar Inverter – 5kW", category: "Inverters", desc: "Reliable hybrid inverter", price: 850000, icon: Cpu, badge: undefined },
@@ -121,13 +87,6 @@ const trustBadges = [
   { icon: Award, t: "Quality", t2: "Products" },
   { icon: Headphones, t: "Expert", t2: "Support" },
   { icon: Lock, t: "Secure", t2: "& Reliable" },
-];
-
-const benefits = [
-  { icon: FileText, t: "Best Prices", d: "Competitive & transparent" },
-  { icon: Briefcase, t: "Secure Payments", d: "Safe and trusted checkout" },
-  { icon: Truck, t: "Fast Delivery", d: "Delivered to your door" },
-  { icon: ShieldCheck, t: "Warranty Included", d: "Peace of mind guaranteed" },
 ];
 
 const testimonials = [
@@ -170,7 +129,6 @@ const footerColumns = [
 
 function Home() {
   const addToCart = useAddToCart();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [productStart, setProductStart] = useState(0);
   const featuredQuery = useQuery({
@@ -199,79 +157,8 @@ function Home() {
 
   return (
     <div className="bg-background text-foreground" style={{ fontFamily: "var(--font-sans)" }}>
-      {/* NAV */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6 sm:px-8">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Leaf className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="text-lg font-bold tracking-tight">SaneGreenEnergy</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-foreground/80">
-            {navLinks.map((n) => (
-              <Link
-                key={n.label}
-                to={n.to}
-                className="transition-colors hover:text-foreground"
-                activeProps={{ className: "!text-primary font-semibold" }}
-                activeOptions={{ exact: true }}
-              >
-                {n.label}
-              </Link>
-            ))}
-            <a href="#" onClick={(e) => e.preventDefault()} className="flex items-center gap-1 transition-colors hover:text-foreground">
-              Resources <ChevronDown className="h-3.5 w-3.5" />
-            </a>
-          </nav>
-          <div className="flex items-center gap-1.5">
-            <button aria-label="Wishlist" className="hidden h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-secondary hover:text-foreground sm:inline-flex">
-              <Heart className="h-4.5 w-4.5" />
-            </button>
-            <Link to="/login" aria-label="Account" className="hidden h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-secondary hover:text-foreground sm:inline-flex">
-              <User className="h-4.5 w-4.5" />
-            </Link>
-            <Link
-              to="/find-installer"
-              className="ml-1 hidden sm:inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
-            >
-              Get a Free Quote <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-            <button
-              aria-label="Open menu"
-              onClick={() => setMenuOpen(true)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground hover:bg-secondary md:hidden"
-            >
-              <Menu className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-        <SheetContent side="right" className="w-4/5 sm:max-w-xs">
-          <SheetHeader>
-            <SheetTitle>Menu</SheetTitle>
-          </SheetHeader>
-          <nav className="mt-6 flex flex-col gap-1">
-            {navLinks.map((n) => (
-              <SheetClose asChild key={n.label}>
-                <Link to={n.to} className="rounded-lg px-4 py-3 text-base text-foreground hover:bg-secondary">
-                  {n.label}
-                </Link>
-              </SheetClose>
-            ))}
-            <SheetClose asChild>
-              <Link to="/find-installer" className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-base font-medium text-primary-foreground">
-                Get a Free Quote
-              </Link>
-            </SheetClose>
-          </nav>
-        </SheetContent>
-      </Sheet>
-
       {/* HERO */}
-      <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8">
+      <section className="mx-auto max-w-[1600px] px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8">
         <div className="relative overflow-hidden rounded-[28px]">
           <img
             src={heroHome}
@@ -354,7 +241,7 @@ function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="mx-auto max-w-7xl px-6 pt-24 sm:px-8">
+      <section className="mx-auto max-w-[1600px] px-6 pt-24 sm:px-8">
         <div className="mb-14 text-center">
           <span className="text-xs font-bold uppercase tracking-[0.15em] text-primary">How It Works</span>
           <h2 className="mt-3 font-serif text-3xl tracking-tight sm:text-4xl">Solar made simple in 3 steps</h2>
@@ -407,7 +294,7 @@ function Home() {
       </section>
 
       {/* SHOP POPULAR PRODUCTS */}
-      <section className="mx-auto max-w-7xl px-6 pt-24 sm:px-8">
+      <section className="mx-auto max-w-[1600px] px-6 pt-24 sm:px-8">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.15em] text-primary">Shop Popular Products</span>
@@ -466,8 +353,6 @@ function Home() {
                               name: p.name,
                               category: p.category,
                               price: p.price,
-                              rating: 0,
-                              reviews: 0,
                               image: p.image || heroHome,
                             })
                           }
@@ -493,26 +378,13 @@ function Home() {
         </div>
       </section>
 
-      {/* BENEFITS STRIP */}
-      <section className="mt-24 bg-secondary/60 py-10">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
-          {benefits.map((b) => (
-            <div key={b.t} className="flex items-center gap-3.5">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card shadow-soft">
-                <b.icon className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <div className="text-sm font-semibold">{b.t}</div>
-                <div className="text-xs text-muted-foreground">{b.d}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="mt-24">
+        <BenefitsStrip />
+      </div>
 
       {/* TESTIMONIALS */}
       <section id="testimonials" className="scroll-mt-24 bg-secondary/30 py-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+        <div className="mx-auto max-w-[1600px] px-6 sm:px-8">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.15em] text-primary">What Our Customers Say</span>
@@ -560,7 +432,7 @@ function Home() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-7xl px-6 py-24 sm:px-8">
+      <section className="mx-auto max-w-[1600px] px-6 py-24 sm:px-8">
         <div className="relative overflow-hidden rounded-[28px] bg-[oklch(0.22_0.03_150)]">
           <img src={ecoHome} alt="" className="absolute inset-y-0 left-0 h-full w-1/2 object-cover opacity-40 sm:opacity-60" />
           <div
@@ -597,7 +469,7 @@ function Home() {
 
       {/* FOOTER */}
       <footer className="border-t border-border bg-background">
-        <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8">
+        <div className="mx-auto max-w-[1600px] px-6 py-16 sm:px-8">
           <div className="grid gap-10 md:grid-cols-5">
             <div className="md:col-span-2">
               <Link to="/" className="flex items-center gap-2.5">
@@ -679,7 +551,7 @@ function Home() {
         </div>
 
         <div className="border-t border-border">
-          <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <div className="mx-auto flex max-w-[1600px] flex-col gap-3 px-6 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-8">
             <span>© {new Date().getFullYear()} SaneGreenEnergy. All rights reserved.</span>
             <div className="flex items-center gap-6">
               <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-foreground transition-colors">Privacy Policy</a>

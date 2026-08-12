@@ -24,6 +24,22 @@ export function TwitterIcon({ className }: IconProps) {
   );
 }
 
+export function LinkedInIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM3.2 8.75h3.5V21H3.2V8.75Zm6.28 0h3.35v1.68h.05c.47-.87 1.6-1.79 3.3-1.79 3.53 0 4.18 2.28 4.18 5.24V21h-3.5v-5.65c0-1.35-.02-3.08-1.9-3.08-1.9 0-2.19 1.46-2.19 2.98V21H9.48V8.75Z" />
+    </svg>
+  );
+}
+
+export function YouTubeIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M21.6 7.2s-.2-1.5-.85-2.15c-.8-.85-1.7-.85-2.1-.9C15.9 4 12 4 12 4h-.02s-3.9 0-6.65.15c-.4.05-1.3.05-2.1.9-.65.65-.85 2.15-.85 2.15S2.15 9 2.15 10.75v1.5C2.15 14 2.4 15.8 2.4 15.8s.2 1.5.85 2.15c.8.85 1.86.82 2.33.91C7.2 19 12 19 12 19s3.9 0 6.65-.15c.4-.05 1.3-.05 2.1-.9.65-.65.85-2.15.85-2.15s.25-1.75.25-3.5v-1.5c0-1.75-.25-3.55-.25-3.55ZM9.95 14.5v-5.5l5.3 2.76-5.3 2.74Z" />
+    </svg>
+  );
+}
+
 export function WhatsAppIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor">

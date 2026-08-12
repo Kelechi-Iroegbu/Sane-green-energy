@@ -41,7 +41,7 @@ const team = [
 function About() {
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-16">
+      <section className="mx-auto max-w-[1600px] px-6 pt-12 pb-8 md:pt-16">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">About Us</span>
           <h1 className="mt-3 font-display text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] max-w-4xl">
@@ -67,7 +67,7 @@ function About() {
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-20 grid md:grid-cols-2 gap-12 items-center">
+      <section className="mx-auto max-w-[1600px] px-6 pb-20 grid md:grid-cols-2 gap-12 items-center">
         <div className="overflow-hidden rounded-3xl bg-card border border-border shadow-soft order-2 md:order-1">
           <img
             src={aboutImg}
@@ -92,7 +92,7 @@ function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-20">
+      <section className="mx-auto max-w-[1600px] px-6 pb-20">
         <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
           {stats.map((s, i) => (
             <motion.div
@@ -110,7 +110,7 @@ function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-20">
+      <section className="mx-auto max-w-[1600px] px-6 pb-20">
         <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Principles</span>
         <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight mb-12">How we operate.</h2>
         <div className="grid md:grid-cols-2 gap-5">
@@ -135,7 +135,7 @@ function About() {
         </div>
       </section>
 
-      <section id="team" className="mx-auto max-w-7xl px-6 pb-24 scroll-mt-24">
+      <section id="team" className="mx-auto max-w-[1600px] px-6 pb-24 scroll-mt-24">
         <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">The people behind it</span>
         <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight mb-12">
           The team you'll actually talk to.
@@ -167,7 +167,7 @@ function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-24">
+      <section className="mx-auto max-w-[1600px] px-6 pb-24">
         <div className="rounded-[28px] border border-border bg-card p-10 text-center md:p-16">
           <h2 className="font-display text-2xl md:text-4xl font-semibold tracking-tight">
             Ready to stop paying for diesel?

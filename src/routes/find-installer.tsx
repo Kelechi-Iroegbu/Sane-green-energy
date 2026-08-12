@@ -183,7 +183,7 @@ function FindInstaller() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-16">
+      <section className="mx-auto max-w-[1600px] px-6 pt-12 pb-8 md:pt-16">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Enugu State
@@ -197,7 +197,7 @@ function FindInstaller() {
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-10">
+      <section className="mx-auto max-w-[1600px] px-6 pb-10">
         <div className="flex w-full items-stretch overflow-hidden rounded-full border border-border bg-background shadow-soft">
           <input
             type="text"
@@ -245,7 +245,7 @@ function FindInstaller() {
         </div>
       </section>
 
-      <section ref={resultsRef} className="mx-auto max-w-7xl px-6 pb-20 scroll-mt-24">
+      <section ref={resultsRef} className="mx-auto max-w-[1600px] px-6 pb-20 scroll-mt-24">
         {filtered.length === 0 ? (
           <div className="rounded-3xl border border-border bg-background p-16 text-center">
             <p className="text-muted-foreground">No installers match your search.</p>
@@ -323,7 +323,7 @@ function FindInstaller() {
         )}
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-24">
+      <section className="mx-auto max-w-[1600px] px-6 pb-24">
         <div className="rounded-[28px] border border-border bg-card p-10 text-center md:p-16">
           <h2 className="font-display text-2xl md:text-4xl font-semibold tracking-tight">
             Don't see an installer in your area?

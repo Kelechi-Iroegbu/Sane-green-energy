@@ -87,7 +87,7 @@ function RootComponent() {
       <AuthProvider>
         <CartProvider>
           <div className="min-h-screen flex flex-col bg-background text-foreground">
-            {!isLandingPage && <SiteHeader />}
+            <SiteHeader />
             <main className="flex-1">
               <Outlet />
             </main>

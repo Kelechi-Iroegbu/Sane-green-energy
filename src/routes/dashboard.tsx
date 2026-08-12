@@ -83,7 +83,7 @@ function DashboardPage() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-16">
+      <section className="mx-auto max-w-[1600px] px-6 pt-12 pb-8 md:pt-16">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Dashboard</span>
           <h1 className="mt-3 font-display text-4xl md:text-5xl font-semibold tracking-tight">
@@ -93,7 +93,7 @@ function DashboardPage() {
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-24">
+      <section className="mx-auto max-w-[1600px] px-6 pb-24">
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="space-y-12 lg:col-span-2">
             {/* Current Cart */}
@@ -115,8 +115,12 @@ function DashboardPage() {
                   <ul className="space-y-3">
                     {cartItems.map((i) => (
                       <li key={i.id} className="flex items-center gap-4 rounded-xl border border-border p-3">
-                        <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-secondary">
-                          <img src={i.img} alt={i.name} className="h-full w-full object-cover" />
+                        <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-secondary">
+                          {i.img ? (
+                            <img src={i.img} alt={i.name} className="h-full w-full object-cover" />
+                          ) : (
+                            <Package className="h-6 w-6 text-primary/50" strokeWidth={1.25} />
+                          )}
                         </div>
                         <div className="min-w-0 flex-1">
                           <h3 className="truncate text-sm font-semibold">{i.name}</h3>
