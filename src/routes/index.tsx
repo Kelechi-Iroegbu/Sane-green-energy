@@ -25,12 +25,10 @@ import {
   Wrench,
   Wind,
   ShoppingCart,
-  Mail,
 } from "lucide-react";
 import heroHome from "@/assets/hero-home.jpg";
 import ecoHome from "@/assets/eco-home.jpg";
 import { useAddToCart } from "@/hooks/use-add-to-cart";
-import { FacebookIcon, InstagramIcon, TwitterIcon } from "@/components/SocialIcons";
 import { BenefitsStrip } from "@/components/BenefitsStrip";
 import { resolveImage } from "@/lib/api";
 import { iconForCategory } from "@/lib/category-icons";
@@ -95,41 +93,9 @@ const testimonials = [
   { quote: "Professional, timely and affordable. The best solar investment I've made.", name: "Tunde Adebayo", loc: "Ibadan, Nigeria", initials: "TA" },
 ];
 
-const footerColumns = [
-  {
-    heading: "Company",
-    links: [
-      { label: "About Us", to: "/about" as const },
-      { label: "How It Works", to: "/solutions" as const },
-      { label: "Careers", to: undefined },
-      { label: "Blog", to: undefined },
-      { label: "Contact Us", to: undefined },
-    ],
-  },
-  {
-    heading: "Support",
-    links: [
-      { label: "Help Center", to: undefined },
-      { label: "Shipping & Delivery", to: undefined },
-      { label: "Returns", to: undefined },
-      { label: "Warranty", to: undefined },
-      { label: "FAQs", to: undefined },
-    ],
-  },
-  {
-    heading: "Resources",
-    links: [
-      { label: "Solar Guide", to: undefined },
-      { label: "Energy Savings 101", to: undefined },
-      { label: "News & Updates", to: undefined },
-      { label: "Installer Program", to: "/find-installer" as const },
-    ],
-  },
-];
 
 function Home() {
   const addToCart = useAddToCart();
-  const [subscribed, setSubscribed] = useState(false);
   const [productStart, setProductStart] = useState(0);
   const featuredQuery = useQuery({
     queryKey: ["products", "featured"],
@@ -466,100 +432,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="border-t border-border bg-background">
-        <div className="mx-auto max-w-[1600px] px-6 py-16 sm:px-8">
-          <div className="grid gap-10 md:grid-cols-5">
-            <div className="md:col-span-2">
-              <Link to="/" className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                  <Leaf className="h-4 w-4 text-primary-foreground" />
-                </div>
-                <span className="text-lg font-bold tracking-tight">SaneGreenEnergy</span>
-              </Link>
-              <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                Making clean, affordable energy accessible to every home in Nigeria.
-              </p>
-              <div className="mt-6 flex items-center gap-3">
-                <a href="#" onClick={(e) => e.preventDefault()} className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-foreground/70 hover:bg-primary hover:text-primary-foreground transition-colors">
-                  <FacebookIcon className="h-4 w-4" />
-                </a>
-                <a href="#" onClick={(e) => e.preventDefault()} className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-foreground/70 hover:bg-primary hover:text-primary-foreground transition-colors">
-                  <InstagramIcon className="h-4 w-4" />
-                </a>
-                <a href="#" onClick={(e) => e.preventDefault()} className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-foreground/70 hover:bg-primary hover:text-primary-foreground transition-colors">
-                  <TwitterIcon className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-
-            {footerColumns.map((col) => (
-              <div key={col.heading}>
-                <h4 className="text-xs font-semibold uppercase tracking-widest text-foreground">{col.heading}</h4>
-                <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
-                  {col.links.map((l) =>
-                    l.to ? (
-                      <li key={l.label}>
-                        <Link to={l.to} className="hover:text-foreground transition-colors">
-                          {l.label}
-                        </Link>
-                      </li>
-                    ) : (
-                      <li key={l.label}>
-                        <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-foreground transition-colors">
-                          {l.label}
-                        </a>
-                      </li>
-                    ),
-                  )}
-                </ul>
-              </div>
-            ))}
-
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-foreground">Subscribe to our newsletter</h4>
-              <p className="mt-4 text-sm text-muted-foreground">Get tips, updates and exclusive offers.</p>
-              {subscribed ? (
-                <p className="mt-3 text-sm font-medium text-primary">You're subscribed — welcome aboard!</p>
-              ) : (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setSubscribed(true);
-                  }}
-                  className="mt-3 flex items-center gap-2 rounded-full border border-border bg-card p-1.5 pl-4"
-                >
-                  <Mail className="h-4 w-4 shrink-0 text-muted-foreground" />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your email"
-                    className="min-w-0 flex-1 bg-transparent text-sm focus:outline-none"
-                  />
-                  <button
-                    type="submit"
-                    aria-label="Subscribe"
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground hover:opacity-90"
-                  >
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-border">
-          <div className="mx-auto flex max-w-[1600px] flex-col gap-3 px-6 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-8">
-            <span>© {new Date().getFullYear()} SaneGreenEnergy. All rights reserved.</span>
-            <div className="flex items-center gap-6">
-              <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-foreground transition-colors">Privacy Policy</a>
-              <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-foreground transition-colors">Terms &amp; Conditions</a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

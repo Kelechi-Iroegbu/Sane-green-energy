@@ -1,4 +1,4 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -85,8 +85,6 @@ function RootComponent() {
         },
       }),
   );
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isLandingPage = pathname === "/";
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -97,7 +95,7 @@ function RootComponent() {
             <main className="flex-1">
               <Outlet />
             </main>
-            {!isLandingPage && <SiteFooter />}
+            <SiteFooter />
             <CartDrawer />
             <CustomerCareWidget />
             <Toaster />
