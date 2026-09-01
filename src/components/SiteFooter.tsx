@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Leaf, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { useState } from "react";
 import { FacebookIcon, InstagramIcon, TwitterIcon, LinkedInIcon, YouTubeIcon } from "@/components/SocialIcons";
+import logoUrl from "@/assets/logo.png";
 
 const shopLinks = [
   { label: "Solar Panels", to: "/products" as const },
@@ -99,9 +100,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1600px] px-6 py-16 grid gap-10 md:grid-cols-7">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 mb-4">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[oklch(0.9_0.02_90)]">
-              <Leaf className="h-4 w-4 text-[oklch(0.2_0.03_150)]" />
-            </div>
+            <img src={logoUrl} alt="SaneGreenEnergy" className="h-9 w-9 object-contain" />
             <span className="text-lg font-bold text-white">SaneGreenEnergy</span>
           </div>
           <p className="text-sm text-[oklch(0.9_0.02_90/0.7)] max-w-sm">
