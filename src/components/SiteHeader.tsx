@@ -9,7 +9,7 @@ import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from "@/comp
 const navLinks = [
   { label: "Home", to: "/" as const },
   { label: "Products", to: "/products" as const },
-  { label: "Savings", to: "/solutions" as const },
+  { label: "Solutions", to: "/solutions" as const },
   { label: "Find an Installer", to: "/find-installer" as const },
 ];
 
