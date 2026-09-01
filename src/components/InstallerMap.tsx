@@ -89,6 +89,10 @@ export default function InstallerMap({
         )}
       </MapContainer>
 
+      <div className="absolute bottom-3 left-3 z-[1000] inline-flex items-center gap-1.5 rounded-full border border-border bg-card/95 px-3 py-1.5 text-[11px] font-medium text-muted-foreground shadow-soft backdrop-blur">
+        <span className="h-2 w-2 rounded-full bg-primary" /> Installer
+      </div>
+
       <div className="absolute right-3 top-3 z-[1000] flex flex-col items-end gap-1.5">
         <button
           type="button"

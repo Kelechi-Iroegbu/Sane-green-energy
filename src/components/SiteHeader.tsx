@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Heart, User, ArrowRight, ChevronDown, ShoppingCart, LogOut } from "lucide-react";
+import { Menu, Heart, User, ArrowRight, ShoppingCart, LogOut } from "lucide-react";
 import { useState } from "react";
 import logoUrl from "@/assets/logo.png";
 import { useCart } from "@/context/CartContext";
@@ -37,9 +37,6 @@ export function SiteHeader() {
               {n.label}
             </Link>
           ))}
-          <a href="#" onClick={(e) => e.preventDefault()} className="flex items-center gap-1 transition-colors hover:text-foreground">
-            Resources <ChevronDown className="h-3.5 w-3.5" />
-          </a>
         </nav>
         <div className="flex items-center gap-1.5">
           <button aria-label="Wishlist" className="hidden h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-secondary hover:text-foreground sm:inline-flex">
