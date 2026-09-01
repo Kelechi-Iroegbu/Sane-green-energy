@@ -10,9 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as FindInstallerRouteImport } from './routes/find-installer'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AboutRouteImport } from './routes/about'
@@ -23,6 +25,11 @@ import { Route as CheckoutCallbackRouteImport } from './routes/checkout/callback
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -38,6 +45,11 @@ const ProductsRoute = ProductsRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FindInstallerRoute = FindInstallerRouteImport.update({
@@ -76,9 +88,11 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/dashboard': typeof DashboardRoute
   '/find-installer': typeof FindInstallerRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/products': typeof ProductsRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/checkout/callback': typeof CheckoutCallbackRoute
   '/checkout/': typeof CheckoutIndexRoute
@@ -88,9 +102,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/dashboard': typeof DashboardRoute
   '/find-installer': typeof FindInstallerRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/products': typeof ProductsRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/checkout/callback': typeof CheckoutCallbackRoute
   '/checkout': typeof CheckoutIndexRoute
@@ -101,9 +117,11 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/dashboard': typeof DashboardRoute
   '/find-installer': typeof FindInstallerRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/products': typeof ProductsRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/solutions': typeof SolutionsRoute
   '/checkout/callback': typeof CheckoutCallbackRoute
   '/checkout/': typeof CheckoutIndexRoute
@@ -115,9 +133,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/dashboard'
     | '/find-installer'
+    | '/forgot-password'
     | '/login'
     | '/products'
     | '/register'
+    | '/reset-password'
     | '/solutions'
     | '/checkout/callback'
     | '/checkout/'
@@ -127,9 +147,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/dashboard'
     | '/find-installer'
+    | '/forgot-password'
     | '/login'
     | '/products'
     | '/register'
+    | '/reset-password'
     | '/solutions'
     | '/checkout/callback'
     | '/checkout'
@@ -139,9 +161,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/dashboard'
     | '/find-installer'
+    | '/forgot-password'
     | '/login'
     | '/products'
     | '/register'
+    | '/reset-password'
     | '/solutions'
     | '/checkout/callback'
     | '/checkout/'
@@ -152,9 +176,11 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   DashboardRoute: typeof DashboardRoute
   FindInstallerRoute: typeof FindInstallerRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   ProductsRoute: typeof ProductsRoute
   RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SolutionsRoute: typeof SolutionsRoute
   CheckoutCallbackRoute: typeof CheckoutCallbackRoute
   CheckoutIndexRoute: typeof CheckoutIndexRoute
@@ -167,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/solutions'
       fullPath: '/solutions'
       preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -188,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/find-installer': {
@@ -240,9 +280,11 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   DashboardRoute: DashboardRoute,
   FindInstallerRoute: FindInstallerRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   ProductsRoute: ProductsRoute,
   RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SolutionsRoute: SolutionsRoute,
   CheckoutCallbackRoute: CheckoutCallbackRoute,
   CheckoutIndexRoute: CheckoutIndexRoute,

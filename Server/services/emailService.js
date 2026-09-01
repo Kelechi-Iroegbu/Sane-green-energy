@@ -60,4 +60,38 @@ async function sendReceiptEmail({ order, pdfBuffer }) {
   });
 }
 
-module.exports = { sendReceiptEmail };
+async function sendPasswordResetEmail({ to, name, resetUrl }) {
+  if (!resend) {
+    console.warn(
+      `RESEND_API_KEY not set — password reset link for ${to} (dev only): ${resetUrl}`
+    );
+    return;
+  }
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#1f2933;">
+      <h2 style="color:#1f6d3a;margin-bottom:0;">SaneGreenEnergy</h2>
+      <p style="color:#6b7280;margin-top:4px;">Nigeria's Solar Marketplace</p>
+      <p>Hi ${name || "there"},</p>
+      <p>We received a request to reset your SaneGreenEnergy password. Click the button below to choose a new one. This link expires in 30 minutes.</p>
+      <p style="margin:24px 0;">
+        <a href="${resetUrl}" style="display:inline-block;background:#1f6d3a;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:9999px;font-size:14px;">
+          Reset password
+        </a>
+      </p>
+      <p style="font-size:13px;color:#6b7280;">If the button doesn't work, paste this link into your browser:<br />${resetUrl}</p>
+      <p style="margin-top:24px;color:#6b7280;font-size:13px;">
+        If you didn't request this, you can safely ignore this email — your password won't change.
+      </p>
+    </div>
+  `;
+
+  await resend.emails.send({
+    from: process.env.EMAIL_FROM_ADDRESS || "SaneGreenEnergy <onboarding@resend.dev>",
+    to,
+    subject: "Reset your SaneGreenEnergy password",
+    html,
+  });
+}
+
+module.exports = { sendReceiptEmail, sendPasswordResetEmail };

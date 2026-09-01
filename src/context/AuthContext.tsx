@@ -15,6 +15,8 @@ type AuthContextValue = {
   isReady: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
+  requestPasswordReset: (email: string) => Promise<string>;
+  resetPassword: (token: string, password: string) => Promise<void>;
   logout: () => void;
 };
 
@@ -68,6 +70,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [persist],
   );
 
+  const requestPasswordReset = useCallback(async (email: string) => {
+    const { message } = await apiFetch<{ message: string }>("/users/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+    return message;
+  }, []);
+
+  const resetPassword = useCallback(
+    async (token: string, password: string) => {
+      const authUser = await apiFetch<AuthUser>("/users/reset-password", {
+        method: "POST",
+        body: JSON.stringify({ token, password }),
+      });
+      persist(authUser);
+    },
+    [persist],
+  );
+
   const logout = useCallback(() => {
     localStorage.removeItem(USER_KEY);
     localStorage.removeItem(TOKEN_KEY);
@@ -80,6 +101,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isReady,
     login,
     register,
+    requestPasswordReset,
+    resetPassword,
     logout,
   };
 
