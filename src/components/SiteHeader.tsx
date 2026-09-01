@@ -22,7 +22,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-6 sm:px-8">
         <Link to="/" className="flex items-center gap-2.5">
-          <img src={logoUrl} alt="SaneGreenEnergy" className="h-9 w-9 object-contain" />
+          <img src={logoUrl} alt="SaneGreenEnergy" className="h-12 w-12 object-contain" />
           <span className="text-lg font-bold tracking-tight">SaneGreenEnergy</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm text-foreground/80">

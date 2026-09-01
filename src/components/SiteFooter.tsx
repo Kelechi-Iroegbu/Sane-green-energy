@@ -100,7 +100,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1600px] px-6 py-16 grid gap-10 md:grid-cols-7">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 mb-4">
-            <img src={logoUrl} alt="SaneGreenEnergy" className="h-9 w-9 object-contain" />
+            <img src={logoUrl} alt="SaneGreenEnergy" className="h-14 w-14 object-contain" />
             <span className="text-lg font-bold text-white">SaneGreenEnergy</span>
           </div>
           <p className="text-sm text-[oklch(0.9_0.02_90/0.7)] max-w-sm">
